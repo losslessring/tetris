@@ -14,7 +14,7 @@ const projectArrayToArray = (array_field, array_object, position = 0) =>{
 	// console.log(array_object.length)
 	// console.log(position + array_object.length)
 	// console.log(array_field.length)
-	
+
 	// console.log("position = " + position +
 	// 			" array_field.length = " + array_field.length +
 	// 			" array_object.length = " + array_object.length
@@ -43,6 +43,16 @@ const coordsToArrayIndex = (x, y, xsize) => {
 }
 
 
+const checkCells = (field, figure, position, scan_increment, value) => {
+		for (let i = 0; i < figure.length; i++){				
+			if(field[position + i + scan_increment] == value){
+				return true
+			}
+		}
+		return false
+}
+
+
 const fall = (array_field, array_object, start, increment, steps) => {
 
 				let timerId = setInterval(() => {
@@ -58,4 +68,4 @@ const fall = (array_field, array_object, start, increment, steps) => {
 				
 		}
 
-export {getRandomInt, projectArrayToArray, coordsToArrayIndex, fall}
+export {getRandomInt, projectArrayToArray, coordsToArrayIndex, checkCells}

@@ -12,7 +12,9 @@ export default class Field {
 		this.cells = array
 		//console.log(this.cells)
 	}
+	checkCell(figure, scan_increment,value) {
 
+	}
 
 }
 

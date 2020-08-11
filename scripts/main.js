@@ -1,7 +1,7 @@
 import Field from './field.js'
 import Figure from './figure.js'
 import DisplayField from './display.js'
-import {getRandomInt, projectArrayToArray, coordsToArrayIndex, fall} from './utility.js'
+import {getRandomInt, projectArrayToArray, coordsToArrayIndex, checkCells} from './utility.js'
 
 
 const rows = 10
@@ -19,25 +19,9 @@ let display_field = new DisplayField(document.getElementById("container"),
 
 console.log(projectArrayToArray(field.cells, figure.shape, 0))
 
-//fall(field.cells, figure.shape, 0, 1, 10)
 
-// let timerId = setInterval(() => {
 
-// 			document.getElementsByClassName('cell')[getRandomInt(0, rows * cols)].style.backgroundColor = "blue"
-// 						}, 500)
-
-// const fall = (cell, increment) => {
-
-// 					setInterval(() => {
-// 						document.getElementsByClassName('cell')[cell].style.backgroundColor = "blue"
-// 						cell = cell + increment
-
-// 						}, 500)
-// 		}
-
-// fall(1, 10)
-
-const mainCycle = (array_field, array_object, position, increment, boundary) => {
+const mainCycle = (position, increment, boundary) => {
 				document.onkeydown = function(e){
         
         
@@ -68,7 +52,7 @@ const mainCycle = (array_field, array_object, position, increment, boundary) => 
 
 						try {
 
-							var result = projectArrayToArray(array_field, array_object, position)
+							var result = projectArrayToArray(field.cells, figure.shape, position)
 
 						} catch (e) {
 						  	console.error(e);
@@ -76,18 +60,26 @@ const mainCycle = (array_field, array_object, position, increment, boundary) => 
 
 						}
 
+						if (checkCells(field.cells, figure.shape, position, cols, 1)) {
+							field.snapshot(result)	
+							position = 5
+						}
 
-						position = position + increment
 
-						if (position >= boundary){
+
+
+
+						if (checkCells(field.cells, figure.shape, position, cols, undefined)){
 							//clearInterval(timerId)
 							field.snapshot(result)	
 							position = 5
 					  	}
 
+					  	position = position + increment
+
 						//console.log("position = " + position + " increment = " + increment + " boundary = " + boundary)
 						//console.log(result)
-						console.log(field.cells)
+						//console.log(position)
 						display_field.update(result)
 						
 						
@@ -96,7 +88,7 @@ const mainCycle = (array_field, array_object, position, increment, boundary) => 
 				
 		}
 
-mainCycle(field.cells, figure.shape, 5, cols, field.cells.length)
+mainCycle(5, cols, field.cells.length)
 
 // Генерация элемента - случайная позиция в верхнем ряду - от 0 до rows
 // Сделать падение элемента - следующая клетка внизу - это номер начального элемента + количество рядов
