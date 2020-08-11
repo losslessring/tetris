@@ -80,11 +80,14 @@ const mainCycle = (array_field, array_object, position, increment, boundary) => 
 						position = position + increment
 
 						if (position >= boundary){
-							clearInterval(timerId)
+							//clearInterval(timerId)
+							field.snapshot(result)	
+							position = 5
 					  	}
 
 						//console.log("position = " + position + " increment = " + increment + " boundary = " + boundary)
 						//console.log(result)
+						console.log(field.cells)
 						display_field.update(result)
 						
 						

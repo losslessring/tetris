@@ -7,6 +7,12 @@ export default class Field {
         
 	}
 
+	snapshot(array) {
+
+		this.cells = array
+		//console.log(this.cells)
+	}
+
 
 }
 

@@ -14,8 +14,14 @@ const projectArrayToArray = (array_field, array_object, position = 0) =>{
 	// console.log(array_object.length)
 	// console.log(position + array_object.length)
 	// console.log(array_field.length)
+	
+	// console.log("position = " + position +
+	// 			" array_field.length = " + array_field.length +
+	// 			" array_object.length = " + array_object.length
+	// 			)
 	let result = array_field.map(element => element)
 	
+	//Если позиция больше границы массива, то не успевая выполниться, выкидывает исключение
 	if (position + array_object.length > array_field.length){			
 		
 		throw new Error('Out of array range')
