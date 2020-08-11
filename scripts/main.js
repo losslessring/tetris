@@ -26,6 +26,11 @@ const mainCycle = (position, increment, boundary) => {
         
         
         switch(e.keyCode){
+
+        	case 32:                
+                console.log('space')
+                clearInterval(timerId)
+                break
             case 37:
                 //snake.course = 'left'
                 console.log('left')
@@ -33,6 +38,7 @@ const mainCycle = (position, increment, boundary) => {
                 break
             case 38:
                 //snake.course = 'up'
+                figure.rotate()
                 break
             case 39:
                 //snake.course = 'right'
@@ -41,6 +47,8 @@ const mainCycle = (position, increment, boundary) => {
                 break
             case 40:
                 //snake.course = 'down'
+                console.log('down')
+                position = position + cols
                 break
         }
     }
@@ -51,7 +59,7 @@ const mainCycle = (position, increment, boundary) => {
 						
 
 						try {
-
+						//Проекция фигуры в стакан - проекция массива фигуры в массив стакана по позиции
 							var result = projectArrayToArray(field.cells, figure.shape, position)
 
 						} catch (e) {
@@ -60,20 +68,17 @@ const mainCycle = (position, increment, boundary) => {
 
 						}
 
-						if (checkCells(field.cells, figure.shape, position, cols, 1)) {
+						//Проверка дна и лежащих снизу фигур, если фигура достигла дна,
+						//или под ней лежит фигура
+						//то делается снимок положения фигуры в стакане, и он сохраняется
+						// как состояние стакана
+						if (checkCells(field.cells, figure.shape, position, cols, 1) ||
+							checkCells(field.cells, figure.shape, position, cols, undefined)) {
 							field.snapshot(result)	
 							position = 5
 						}
 
-
-
-
-
-						if (checkCells(field.cells, figure.shape, position, cols, undefined)){
-							//clearInterval(timerId)
-							field.snapshot(result)	
-							position = 5
-					  	}
+						field.deleteRow(field.checkRow(1))
 
 					  	position = position + increment
 

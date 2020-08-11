@@ -3,28 +3,17 @@ export default class Figure {
 		this.active = true
 		this.x = x
 		this.y = y
-		const shapes =  [
-						 [1,1,1,1]
+		this.shapes =  [
+						 [1,1]
+						 
 						]
-		this.shape = shapes[shape]
+		this.shape = this.shapes[shape]
 	}
 
-	move(direction){
-		switch(direction){
-                case 'right':
-                    this.x++
-                    break
-                case 'left':
-                    this.x--
-                    break
-                case 'up':
-                    this.y--
-                    break
-                case 'down':
-                    this.y++
-                    break
-            }
+	rotate(increment){
+		this.shape = [1,0,0,0,0,0,0,0,0,0,1]
 	}
+
 
 
 }
