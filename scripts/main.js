@@ -4,8 +4,8 @@ import DisplayField from './display.js'
 import {getRandomInt, projectArrayToArray, coordsToArrayIndex, checkCells} from './utility.js'
 
 
-const rows = 10
-const cols = 10
+const rows = 20
+const cols = 9
 
 let field = new Field(rows, cols)
 console.log(field)
@@ -22,8 +22,9 @@ console.log(projectArrayToArray(field.cells, figure.shape, 0))
 
 
 const mainCycle = (position, increment, boundary) => {
-				document.onkeydown = function(e){
+	document.onkeydown = function(e){
         
+        if (e.repeat) { return }
         
         switch(e.keyCode){
 
@@ -32,23 +33,42 @@ const mainCycle = (position, increment, boundary) => {
                 clearInterval(timerId)
                 break
             case 37:
-                //snake.course = 'left'
+
                 console.log('left')
-                position = position - 1
+                //console.log('position =' + position + " position * cols = " + position * cols)
+                //console.log(field.checkBoundary(position, field.leftBoundary))
+                if (!field.checkBoundary(position, field.leftBoundary)){
+					position = position - 1
+                }
+                
                 break
             case 38:
-                //snake.course = 'up'
+
                 figure.rotateRight()
                 break
             case 39:
-                //snake.course = 'right'
-                console.log('right')
-                position = position + 1
+
+
+                if (!field.checkBoundary(position + figure.xsize - 1 , field.rightBoundary)){
+					position = position + 1
+                }
+
+                //position = position + 1
                 break
             case 40:
-                //snake.course = 'down'
+            	// console.log(figure.ysize)
+            	// console.log((position + figure.ysize + cols))
+            	// console.log((rows * cols -1))
+            	// console.log(!(position + figure.ysize - 1 + cols >= rows * cols - 1))
                 console.log('down')
-                position = position + cols
+                //let prevPosition = position
+                //if (!(position + figure.ysize  + cols > rows * cols - 1)){
+				//	position = position + cols
+                //}
+                // if(position > rows * cols - 1){
+                // 	position = prevPosition
+                // }
+                
                 break
         }
     }
@@ -58,15 +78,22 @@ const mainCycle = (position, increment, boundary) => {
 				let timerId = setInterval(() => {																														
 						
 
-						try {
+						// try {
 						//Проекция фигуры в стакан - проекция массива фигуры в массив стакана по позиции
-							var result = projectArrayToArray(field.cells, figure.shape, position)
+							
 
-						} catch (e) {
-						  	console.error(e);
-							clearInterval(timerId)
+							let result = projectArrayToArray(field.cells, figure.shape, position)
+							//console.log(result)
+							if (result !== undefined){
+								field.projectedFigure = result
+							}
 
-						}
+						// } catch (e) {
+						//   	console.error(e);
+						// 	//clearInterval(timerId)
+
+
+						// }
 
 						//Проверка дна и лежащих снизу фигур, если фигура достигла дна,
 						//или под ней лежит фигура
@@ -74,7 +101,7 @@ const mainCycle = (position, increment, boundary) => {
 						// как состояние стакана
 						if (checkCells(field.cells, figure.shape, position, cols, 1, 1) ||
 							checkCells(field.cells, figure.shape, position, cols, 1, undefined)) {
-							field.snapshot(result)
+							field.snapshot(field.projectedFigure)
 							figure.resetRotation()	
 							position = 5
 						}
@@ -86,10 +113,10 @@ const mainCycle = (position, increment, boundary) => {
 						//console.log("position = " + position + " increment = " + increment + " boundary = " + boundary)
 						//console.log(result)
 						//console.log(position)
-						display_field.update(result)
+						display_field.update(field.projectedFigure)
 						
 						
-					}, 500)
+					}, 100)
 
 				
 		}

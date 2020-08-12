@@ -17,8 +17,8 @@ const projectArrayToArray = (array_field, array_object, position = 0, value = 1)
 	//Если позиция больше границы массива, то не успевая выполниться, выкидывает исключение
 	if (position + array_object.length > array_field.length){			
 		
-		throw new Error('Out of array range')
-		
+		//throw new Error('Out of array range')
+		return undefined
 		//position = array_field.length - array_object.length
 	}
 	
