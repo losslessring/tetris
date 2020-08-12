@@ -11,7 +11,7 @@ let field = new Field(rows, cols)
 console.log(field)
 
 
-let figure = new Figure(3, 0, 0)
+let figure = new Figure(rows, cols, 0)
 console.log(figure)
 
 let display_field = new DisplayField(document.getElementById("container"), 
@@ -38,7 +38,7 @@ const mainCycle = (position, increment, boundary) => {
                 break
             case 38:
                 //snake.course = 'up'
-                figure.rotate()
+                figure.rotateRight()
                 break
             case 39:
                 //snake.course = 'right'
@@ -72,9 +72,10 @@ const mainCycle = (position, increment, boundary) => {
 						//или под ней лежит фигура
 						//то делается снимок положения фигуры в стакане, и он сохраняется
 						// как состояние стакана
-						if (checkCells(field.cells, figure.shape, position, cols, 1) ||
-							checkCells(field.cells, figure.shape, position, cols, undefined)) {
-							field.snapshot(result)	
+						if (checkCells(field.cells, figure.shape, position, cols, 1, 1) ||
+							checkCells(field.cells, figure.shape, position, cols, 1, undefined)) {
+							field.snapshot(result)
+							figure.resetRotation()	
 							position = 5
 						}
 
@@ -115,3 +116,4 @@ mainCycle(5, cols, field.cells.length)
 //до display.update, чтобы не отключалось условие выключения таймера
 //Что возвращать из функции projectArrayToArray при выходы за границы массива? Exception? или  загонять
 //Массив в конец? Или null?
+//Сделать поворот фигуры - добавлять нули в массив по количеству рядов
