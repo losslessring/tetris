@@ -4,8 +4,8 @@ import DisplayField from './display.js'
 import {getRandomInt, projectArrayToArray, coordsToArrayIndex, checkCells} from './utility.js'
 
 
-const rows = 14
-const cols = 10
+const rows = 20
+const cols = 11
 
 let field = new Field(rows, cols)
 console.log(field)
@@ -37,9 +37,15 @@ const mainCycle = (position, increment, boundary) => {
                 console.log('left')
                 //console.log('position =' + position + " position * cols = " + position * cols)
                 //console.log(field.checkBoundary(position, field.leftBoundary))
-                if (!field.checkBoundary(position, field.leftBoundary)){
+                // if (checkCells(field.cells, figure.shape, position, -1, 1, 1)){
+                // 	console.log('занято')
+                // }
+                //Проверка на границу стакана и на наличие кирпичей рядом
+                if (!field.checkBoundary(position, field.leftBoundary) &&
+                	!checkCells(field.cells, figure.shape, position, -1, 1, 1)){
 					position = position - 1
                 }
+
                 
                 break
             case 38:
@@ -49,7 +55,8 @@ const mainCycle = (position, increment, boundary) => {
             case 39:
 
 
-                if (!field.checkBoundary(position + figure.xsize - 1 , field.rightBoundary)){
+                if (!field.checkBoundary(position + figure.xsize - 1 , field.rightBoundary) &&
+                	!checkCells(field.cells, figure.shape, position + figure.xsize - 1, +1, 1, 1)){
 					position = position + 1
                 }
 
@@ -116,7 +123,7 @@ const mainCycle = (position, increment, boundary) => {
 						display_field.update(field.projectedFigure)
 						
 						
-					}, 200)
+					}, 300)
 
 				
 		}

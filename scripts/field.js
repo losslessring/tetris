@@ -27,7 +27,8 @@ export default class Field {
 
 
 	checkBoundary(position, boundary){
-		return boundary.some(boundaryIndex => boundaryIndex == position);
+		console.log(boundary)
+		return boundary.some(boundaryIndex => boundaryIndex == position)
 	}
 
 	snapshot(array) {

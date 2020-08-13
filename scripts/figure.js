@@ -44,7 +44,8 @@ export default class Figure {
 	resetRotation() {
 		this.rotation = 0
 		this.shape = this.shapes[0]
-
+		this.xsize = this.shapeDescription.xsize[this.rotation]
+		this.ysize = this.shapeDescription.ysize[this.rotation]
 	}
 	rotateRight(){
 		
