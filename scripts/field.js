@@ -23,11 +23,11 @@ export default class Field {
 		return result
 
 	}
-	
+		
 
 
 	checkBoundary(position, boundary){
-		console.log(boundary)
+		//console.log(boundary)
 		return boundary.some(boundaryIndex => boundaryIndex == position)
 	}
 

@@ -49,18 +49,30 @@ export default class Figure {
 	}
 	rotateRight(){
 		
-
+		console.log(this.rotation)
 		this.rotation +=1
 
 		if (this.rotation >= this.shapes.length){
 			this.resetRotation()
 		}
-		
+		console.log(this.rotation)
 		this.shape = this.shapes[this.rotation]
 		this.xsize = this.shapeDescription.xsize[this.rotation]
 		this.ysize = this.shapeDescription.ysize[this.rotation]
 	}
+	rotateLeft(){
+		
 
+		this.rotation -=1
+
+		if (this.rotation < 0){
+			this.resetRotation()
+		}
+
+		this.shape = this.shapes[this.rotation]
+		this.xsize = this.shapeDescription.xsize[this.rotation]
+		this.ysize = this.shapeDescription.ysize[this.rotation]
+	}
 
 
 }

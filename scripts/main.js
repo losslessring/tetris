@@ -1,7 +1,7 @@
 import Field from './field.js'
 import Figure from './figure.js'
 import DisplayField from './display.js'
-import {getRandomInt, projectArrayToArray, coordsToArrayIndex, checkCells} from './utility.js'
+import {getRandomInt, projectArrayToArray, coordsToArrayIndex, checkCells, checkCellsIndices} from './utility.js'
 
 
 const rows = 20
@@ -46,15 +46,37 @@ const mainCycle = (position, increment, boundary) => {
 					position = position - 1
                 }
 
+
                 
                 break
             case 38:
 
+            	
+                //console.log(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.rightBoundary))
+
+                //Переворот, проверка , если фигура пересекает обе границы, значит она вылезла
+                //за пределы, переворачиваем обратно, потом исправить на rotateLeft
                 figure.rotateRight()
+                if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.rightBoundary) &&
+                	checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.leftBoundary)){
+                	figure.rotateRight()	
+                }
+                //Сделать проверку по индексам для всего массива фигуры
+                // if(checkCells(field.cells, figure.shape, position + figure.xsize - 1, +1, field.cells[position])){
+
+                // }
+                // if (field.checkBoundary(position, field.leftBoundary) &&
+                // 	field.checkBoundary(position + figure.xsize - 1 , field.rightBoundary)){
+                // 	console.log('пересечение')
+                // }
+
+                // if(checkCells(field.cells, figure.shape, position, -1, 1, 1)){
+                // 	console.log('пересечение')
+                // }
                 break
             case 39:
 
-
+            	console.log('right')
                 if (!field.checkBoundary(position + figure.xsize - 1 , field.rightBoundary) &&
                 	!checkCells(field.cells, figure.shape, position + figure.xsize - 1, +1, 1, 1)){
 					position = position + 1
@@ -123,7 +145,7 @@ const mainCycle = (position, increment, boundary) => {
 						display_field.update(field.projectedFigure)
 						
 						
-					}, 300)
+					}, 1500)
 
 				
 		}
