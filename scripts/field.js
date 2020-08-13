@@ -2,7 +2,7 @@ export default class Field {
     constructor(rows = 10, cols = 10){
 		this.rows = rows;
         this.cols = cols;
-        this.cells = Array(rows * cols).fill('0')
+        this.cells = Array(rows * cols).fill(0)
         this.projectedFigure = this.cells
         
         this.leftBoundary = this.createBoundary(0, (i, index, cols) => (i * cols) + index, cols, rows)
@@ -64,15 +64,24 @@ export default class Field {
 				console.log(row * this.cols)
 				this.cells[row * this.cols + j] = 0
 			}
-			for ( let i = 0; i < this.cols; i++){
-				this.projectedFigure.pop()
-				this.projectedFigure.unshift(0)
-				//this.projectedFigure.push(0)
-			}
-		
+			this.shift(row)
+				
 	}
-	shift(){
+	//Сдвигает кубики при убирании ряда - разрезает стакан на 2 части - начало + убранный ряд
+	// и остаток внизу. Надо сдвинуть кубики ДО убираемого ряда - поэтому сдвигаем в начальном
+	// куске, потом склеиваем куски.
+	shift(row){
+			let first = this.cells.slice(0, row * this.cols + this.cols)
+			//console.log(first)
+			let end = this.cells.slice(row * this.cols + this.cols, this.rows * this.cols)
+			//console.log(end)
 
+			for ( let i = 0; i <  this.cols; i++){
+				//console.log(i)
+				first.pop()
+				first.unshift(0)
+			}
+			this.cells = first.concat(end)
 	}
 
 }

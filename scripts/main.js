@@ -4,8 +4,8 @@ import DisplayField from './display.js'
 import {getRandomInt, projectArrayToArray, coordsToArrayIndex, checkCells} from './utility.js'
 
 
-const rows = 20
-const cols = 9
+const rows = 14
+const cols = 10
 
 let field = new Field(rows, cols)
 console.log(field)
@@ -116,7 +116,7 @@ const mainCycle = (position, increment, boundary) => {
 						display_field.update(field.projectedFigure)
 						
 						
-					}, 100)
+					}, 200)
 
 				
 		}
