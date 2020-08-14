@@ -119,6 +119,5 @@ export {getRandomInt,
 		projectArrayToArray, 
 		coordsToArrayIndex, 
 		checkCells, 
-		checkCellsAny,
 		checkCellsIndices, 
-		checkCellsCommon}
+		}

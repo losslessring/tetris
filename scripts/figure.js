@@ -6,24 +6,23 @@ export default class Figure {
 		this.rotation = rotation
 
 
-		this.shapeDescription =  {
-									name: "l",
-									coords: [
-												[{x:0, y:0},{x:1, y:0},{x:2, y:0}],
-												[{x:0, y:0},{x:0, y:1},{x:0, y:2}]
-											],
-									xsize: [3, 1],
-									ysize: [1, 3]
-								}
-		this.shapes = this.shapeDescription.coords.map((figure) => {
+		this.shapeDescription = [
+									{
+										name: "l",
+										coords: [
+													[{x:0, y:0},{x:1, y:0},{x:2, y:0},{x:3, y:0}],
+													[{x:0, y:0},{x:0, y:1},{x:0, y:2},{x:0, y:3}]
+												],
+										xsize: [4, 1],
+										ysize: [1, 4]
+									}
+								]
+		this.shapes = this.shapeDescription[0].coords.map((figure) => {
 				return this.calculateProjection(figure, field_rows, field_cols)
 			})
 
-		this.xsize = this.shapeDescription.xsize[this.rotation]
-		this.ysize = this.shapeDescription.ysize[this.rotation]
 
-		this.shape = this.shapes[this.rotation]
-
+		this.rotateRecalc(this.rotation)
 	}
 
 	coordsToArrayIndex(x, y, xsize) {
@@ -41,11 +40,17 @@ export default class Figure {
 		return result
 	}
 
+	rotateRecalc(rotation){
+		this.shape = this.shapes[rotation]
+		this.xsize = this.shapeDescription[0].xsize[rotation]
+		this.ysize = this.shapeDescription[0].ysize[rotation]
+
+	}
+
 	resetRotation() {
 		this.rotation = 0
-		this.shape = this.shapes[0]
-		this.xsize = this.shapeDescription.xsize[this.rotation]
-		this.ysize = this.shapeDescription.ysize[this.rotation]
+		this.rotateRecalc(this.rotation)
+
 	}
 	rotateRight(){
 		
@@ -56,10 +61,9 @@ export default class Figure {
 			this.resetRotation()
 		}
 		//console.log(this.rotation)
-		this.shape = this.shapes[this.rotation]
-		this.xsize = this.shapeDescription.xsize[this.rotation]
-		this.ysize = this.shapeDescription.ysize[this.rotation]
+		this.rotateRecalc(this.rotation)
 	}
+
 	rotateLeft(){
 		
 
@@ -68,10 +72,7 @@ export default class Figure {
 		if (this.rotation < 0){
 			this.resetRotation()
 		}
-
-		this.shape = this.shapes[this.rotation]
-		this.xsize = this.shapeDescription.xsize[this.rotation]
-		this.ysize = this.shapeDescription.ysize[this.rotation]
+		this.rotateRecalc(this.rotation)
 	}
 
 

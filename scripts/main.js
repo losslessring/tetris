@@ -10,7 +10,7 @@ import {getRandomInt,
 
 
 const rows = 20
-const cols = 8
+const cols = 10
 
 let field = new Field(rows, cols)
 console.log(field)
@@ -40,11 +40,7 @@ const mainCycle = (position, increment, boundary) => {
             case 37:
 
                 console.log('left')
-                //console.log('position =' + position + " position * cols = " + position * cols)
-                //console.log(field.checkBoundary(position, field.leftBoundary))
-                // if (checkCells(field.cells, figure.shape, position, -1, 1, 1)){
-                // 	console.log('занято')
-                // }
+
                 //Проверка на границу стакана и на наличие кирпичей рядом
                 if (!field.checkBoundary(position, field.leftBoundary) &&
                 	!checkCells(field.cells, figure.shape, position, -1, 1, 1)){
@@ -58,30 +54,23 @@ const mainCycle = (position, increment, boundary) => {
 
 
 
-                //Переворот, проверка , если фигура пересекает обе границы, значит она вылезла
-                //за пределы, переворачиваем обратно, потом исправить на rotateLeft
+                //Переворот фигуры, проверка пересечения, если фигура после переворота
+                //пересекает уже лежащие фигуры, повернуть обратно
                 figure.rotateRight()
                 if(checkCells(field.cells, figure.shape, position, 0, 1, 1)){
                 	figure.rotateRight()
                 }
 
+                //Переворот, проверка , cделать проверку по индексам для всего массива фигуры
+                //если фигура пересекает обе границы, значит она вылезла
+                //за пределы, переворачиваем обратно, потом исправить на rotateLeft
                 if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.rightBoundary) &&
                 	checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.leftBoundary)
                 	){
                 	figure.rotateRight()	
                 }
-                //Сделать проверку по индексам для всего массива фигуры
-                // if(checkCells(field.cells, figure.shape, position + figure.xsize - 1, +1, field.cells[position])){
+                
 
-                // }
-                // if (field.checkBoundary(position, field.leftBoundary) &&
-                // 	field.checkBoundary(position + figure.xsize - 1 , field.rightBoundary)){
-                // 	console.log('пересечение')
-                // }
-
-                // if(checkCells(field.cells, figure.shape, position, -1, 1, 1)){
-                // 	console.log('пересечение')
-                // }
                 break
             case 39:
 
@@ -91,7 +80,7 @@ const mainCycle = (position, increment, boundary) => {
 					position = position + 1
                 }
 
-                //position = position + 1
+               
                 break
             case 40:
             	// console.log(figure.ysize)
