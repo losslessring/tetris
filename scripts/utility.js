@@ -42,6 +42,7 @@ const coordsToArrayIndex = (x, y, xsize) => {
 const checkCells = (field, figure, position, scan_increment, figure_value, check_value) => {
 		for (let i = 0; i < figure.length; i++){
 			if(figure[i] == figure_value){
+
 				if(field[position + i + scan_increment] == check_value){
 					console.log(position + i + scan_increment)
 					return true
@@ -51,13 +52,28 @@ const checkCells = (field, figure, position, scan_increment, figure_value, check
 		return false
 }
 
+const checkCellsAny = (field, figure, position, scan_increment, figure_value, check_value) => {
+		
+		for (let i = 0; i < figure.length; i++){
+			if(figure[i] == figure_value){
+				console.log(field[position + i + scan_increment])
+				if(field[position + i + scan_increment] == check_value){
+					console.log(position + i + scan_increment)
+					return true
+				}
+			}
+		}
+		return false
+}
+
+
 // Сделать проверку по индексам для всего массива фигуры и массива краев. 
 // Если хоть где то пересекает, возвращаем true
 const checkCellsIndices = (field, figure, position, scan_increment, figure_value, check_values) => {
 		
 		for (let i = 0; i < figure.length; i++){			
 			if(figure[i] == figure_value){
-				console.log(position + i + scan_increment)
+				//console.log(position + i + scan_increment)
 				if(check_values.some(boundaryIndex => boundaryIndex == position + i + scan_increment)){
 					return true
 				}
@@ -67,11 +83,14 @@ const checkCellsIndices = (field, figure, position, scan_increment, figure_value
 		return false
 }
 
-const checkCellsCommmon = (field, figure, position, scan_increment, figure_value, check_values, operation) => {
+const checkCellsCommon = (field, figure, position, scan_increment, figure_value, check_values, operation) => {
 		for (let i = 0; i < figure.length; i++){
 			if(figure[i] == figure_value){
 				//console.log(position + i + scan_increment)
-				return operation(check_values)
+				if((operation(check_values))){
+					return true
+				}
+
 				//return check_values.some(boundaryIndex => boundaryIndex == position + i + scan_increment)
 				
 			}
@@ -96,4 +115,10 @@ const fall = (array_field, array_object, start, increment, steps) => {
 				
 		}
 
-export {getRandomInt, projectArrayToArray, coordsToArrayIndex, checkCells, checkCellsIndices}
+export {getRandomInt, 
+		projectArrayToArray, 
+		coordsToArrayIndex, 
+		checkCells, 
+		checkCellsAny,
+		checkCellsIndices, 
+		checkCellsCommon}

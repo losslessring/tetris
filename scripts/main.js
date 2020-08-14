@@ -1,11 +1,16 @@
 import Field from './field.js'
 import Figure from './figure.js'
 import DisplayField from './display.js'
-import {getRandomInt, projectArrayToArray, coordsToArrayIndex, checkCells, checkCellsIndices} from './utility.js'
+import {getRandomInt, 
+		projectArrayToArray, 
+		coordsToArrayIndex, 
+		checkCells, 		
+		checkCellsIndices,
+		} from './utility.js'
 
 
 const rows = 20
-const cols = 11
+const cols = 8
 
 let field = new Field(rows, cols)
 console.log(field)
@@ -51,14 +56,18 @@ const mainCycle = (position, increment, boundary) => {
                 break
             case 38:
 
-            	
-                //console.log(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.rightBoundary))
+
 
                 //Переворот, проверка , если фигура пересекает обе границы, значит она вылезла
                 //за пределы, переворачиваем обратно, потом исправить на rotateLeft
                 figure.rotateRight()
+                if(checkCells(field.cells, figure.shape, position, 0, 1, 1)){
+                	figure.rotateRight()
+                }
+
                 if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.rightBoundary) &&
-                	checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.leftBoundary)){
+                	checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.leftBoundary)
+                	){
                 	figure.rotateRight()	
                 }
                 //Сделать проверку по индексам для всего массива фигуры
@@ -145,7 +154,7 @@ const mainCycle = (position, increment, boundary) => {
 						display_field.update(field.projectedFigure)
 						
 						
-					}, 1500)
+					}, 200)
 
 				
 		}
