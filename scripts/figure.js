@@ -4,7 +4,7 @@ export default class Figure {
 		this.field_rows = field_rows
 		this.field_cols = field_cols
 		this.rotation = rotation
-
+		this.shapeNumber = 0
 
 		this.shapeDescription = [
 									{
@@ -15,7 +15,16 @@ export default class Figure {
 												],
 										xsize: [4, 1],
 										ysize: [1, 4]
-									}
+									},
+									{
+										name: "o",
+										coords: [
+													[{x:0, y:0},{x:1, y:0},{x:0, y:1},{x:1, y:1}]
+													
+												],
+										xsize: [2],
+										ysize: [2]
+									},
 								]
 		this.shapes = this.shapeDescription[0].coords.map((figure) => {
 				return this.calculateProjection(figure, field_rows, field_cols)
@@ -23,6 +32,23 @@ export default class Figure {
 
 
 		this.rotateRecalc(this.rotation)
+	}
+
+	getRandomInt(min, max) {
+    	//min = Math.ceil(min)
+    	//max = Math.floor(max)
+    	return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + min
+	}
+
+	generateRandomFigure(){
+		//console.log(this.getRandomInt(0, this.shapeDescription.length - 1))
+		this.shapeNumber = this.getRandomInt(0, this.shapeDescription.length - 1)
+
+		this.shapes = this.shapeDescription[this.shapeNumber].coords.map(
+			(figure) => {
+				return this.calculateProjection(figure, this.field_rows, this.field_cols)
+			})
+		this.resetRotation()
 	}
 
 	coordsToArrayIndex(x, y, xsize) {
@@ -42,13 +68,14 @@ export default class Figure {
 
 	rotateRecalc(rotation){
 		this.shape = this.shapes[rotation]
-		this.xsize = this.shapeDescription[0].xsize[rotation]
-		this.ysize = this.shapeDescription[0].ysize[rotation]
+		this.xsize = this.shapeDescription[this.shapeNumber].xsize[rotation]
+		this.ysize = this.shapeDescription[this.shapeNumber].ysize[rotation]
 
 	}
 
 	resetRotation() {
 		this.rotation = 0
+		//console.log("rotation = " + this.rotation)
 		this.rotateRecalc(this.rotation)
 
 	}

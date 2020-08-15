@@ -10,7 +10,8 @@ const projectFigureToField = (field, figure, position) => {
 
 }
 
-
+//Самая главная функция программы - выполняет проецирования массива фигуры
+//в массив стакана
 const projectArrayToArray = (array_field, array_object, position = 0, value = 1) =>{
 	let result = array_field.map(element => element)
 	
@@ -44,7 +45,7 @@ const checkCells = (field, figure, position, scan_increment, figure_value, check
 			if(figure[i] == figure_value){
 
 				if(field[position + i + scan_increment] == check_value){
-					console.log(position + i + scan_increment)
+					//console.log(position + i + scan_increment)
 					return true
 				}
 			}

@@ -23,7 +23,7 @@ export default class Field {
 		return result
 
 	}
-		
+
 
 
 	checkBoundary(position, boundary){
@@ -40,7 +40,7 @@ export default class Field {
 
 	}
 
-
+	// Проверка массива стакана на полный ряд
 	checkRow(value){
 		let counter = 0
 		for ( let i = 0; i < this.rows; i++){

@@ -75,6 +75,7 @@ const mainCycle = (position, increment, boundary) => {
             case 39:
 
             	console.log('right')
+            	console.log("figure.xsize = " + figure.xsize)
                 if (!field.checkBoundary(position + figure.xsize - 1 , field.rightBoundary) &&
                 	!checkCells(field.cells, figure.shape, position + figure.xsize - 1, +1, 1, 1)){
 					position = position + 1
@@ -128,8 +129,10 @@ const mainCycle = (position, increment, boundary) => {
 						// как состояние стакана
 						if (checkCells(field.cells, figure.shape, position, cols, 1, 1) ||
 							checkCells(field.cells, figure.shape, position, cols, 1, undefined)) {
-							field.snapshot(field.projectedFigure)
-							figure.resetRotation()	
+							field.snapshot(field.projectedFigure)							
+							figure.generateRandomFigure()
+							//figure.resetRotation()
+
 							position = 5
 						}
 
@@ -171,3 +174,10 @@ mainCycle(5, cols, field.cells.length)
 //Что возвращать из функции projectArrayToArray при выходы за границы массива? Exception? или  загонять
 //Массив в конец? Или null?
 //Сделать поворот фигуры - добавлять нули в массив по количеству рядов
+
+//Есть два массива - массив фигуры и массив стакана, один массив проецируется на другой, 
+//делаются все проверки - на пересечение границ, на пересечение других фигур при повороте
+// Фугура падает всего одна - просто, когда она достигает дна, делается "снимок" 
+//массив описывющий фигура записывается в массив стакана, и фигура переставляется в начало.
+//У стакана 2 массива - временный, куда проецируется с помощью самой главной функции projectArrayToArray
+//массив фигуры, и постоянный, куда сохраняется состояние стакана после падения фигуры
