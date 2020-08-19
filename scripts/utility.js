@@ -43,7 +43,7 @@ const coordsToArrayIndex = (x, y, xsize) => {
 const checkCells = (field, figure, position, scan_increment, figure_value, check_value) => {
 		for (let i = 0; i < figure.length; i++){
 			if(figure[i] == figure_value){
-
+				
 				if(field[position + i + scan_increment] == check_value){
 					//console.log(position + i + scan_increment)
 					return true

@@ -57,6 +57,7 @@ const mainCycle = (position, increment, boundary) => {
                 //Переворот фигуры, проверка пересечения, если фигура после переворота
                 //пересекает уже лежащие фигуры, повернуть обратно
                 figure.rotateRight()
+                
                 if(checkCells(field.cells, figure.shape, position, 0, 1, 1)){
                 	figure.rotateRight()
                 }
@@ -65,8 +66,12 @@ const mainCycle = (position, increment, boundary) => {
                 //если фигура пересекает обе границы, значит она вылезла
                 //за пределы, переворачиваем обратно, потом исправить на rotateLeft
                 if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.rightBoundary) &&
-                	checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.leftBoundary)
+                	checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.leftBoundary)               	
                 	){
+                	figure.rotateRight()	
+                }
+                // Проверка, если фигура вызезла за дно, перевернуть обратно
+                if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.bottomBoundary)){
                 	figure.rotateRight()	
                 }
                 
@@ -76,8 +81,10 @@ const mainCycle = (position, increment, boundary) => {
 
             	console.log('right')
             	console.log("figure.xsize = " + figure.xsize)
+            	 console.log(position + figure.xsize - 1)
+
                 if (!field.checkBoundary(position + figure.xsize - 1 , field.rightBoundary) &&
-                	!checkCells(field.cells, figure.shape, position + figure.xsize - 1, +1, 1, 1)){
+                	!checkCells(field.cells, figure.shape, position, 1, 1, 1)){
 					position = position + 1
                 }
 
@@ -146,7 +153,7 @@ const mainCycle = (position, increment, boundary) => {
 						display_field.update(field.projectedFigure)
 						
 						
-					}, 200)
+					}, 300)
 
 				
 		}

@@ -25,13 +25,26 @@ export default class Figure {
 										xsize: [2],
 										ysize: [2]
 									},
+									{
+										name: "t",
+										coords: [
+													[{x:0, y:0},{x:1, y:0},{x:2, y:0},{x:1, y:1}],
+													[{x:1, y:0},{x:1, y:1},{x:1, y:2},{x:0, y:1}],
+													[{x:1, y:0},{x:0, y:1},{x:1, y:1},{x:2, y:1}],
+													[{x:0, y:0},{x:0, y:1},{x:0, y:2},{x:1, y:1}],
+													
+												],
+										xsize: [3,2,3,2],
+										ysize: [2,3,2,3]
+									},
+
 								]
-		this.shapes = this.shapeDescription[0].coords.map((figure) => {
-				return this.calculateProjection(figure, field_rows, field_cols)
-			})
-
-
-		this.rotateRecalc(this.rotation)
+		// this.shapes = this.shapeDescription[0].coords.map((figure) => {
+		// 		return this.calculateProjection(figure, field_rows, field_cols)
+		// 	})
+		this.generateRandomFigure()
+		console.log(this.shapes)
+		//this.rotateRecalc(this.rotation)
 	}
 
 	getRandomInt(min, max) {
@@ -42,8 +55,9 @@ export default class Figure {
 
 	generateRandomFigure(){
 		//console.log(this.getRandomInt(0, this.shapeDescription.length - 1))
-		this.shapeNumber = this.getRandomInt(0, this.shapeDescription.length - 1)
 
+		this.shapeNumber = this.getRandomInt(0, this.shapeDescription.length - 1)
+		//console.log(this.shapeDescription[this.shapeNumber].xsize)
 		this.shapes = this.shapeDescription[this.shapeNumber].coords.map(
 			(figure) => {
 				return this.calculateProjection(figure, this.field_rows, this.field_cols)
