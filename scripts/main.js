@@ -81,7 +81,7 @@ const mainCycle = (position, increment, boundary) => {
 
             	console.log('right')
             	console.log("figure.xsize = " + figure.xsize)
-            	 console.log(position + figure.xsize - 1)
+            	 //console.log(position + figure.xsize - 1)
 
                 if (!field.checkBoundary(position + figure.xsize - 1 , field.rightBoundary) &&
                 	!checkCells(field.cells, figure.shape, position, 1, 1, 1)){
