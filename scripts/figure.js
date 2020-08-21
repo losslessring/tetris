@@ -41,9 +41,7 @@ export default class Figure {
 										name: "z",
 										coords: [
 													[{x:0, y:0},{x:1, y:0},{x:1, y:1},{x:2, y:1}],
-													[{x:1, y:0},{x:0, y:1},{x:1, y:1},{x:0, y:2}]
-													
-													
+													[{x:1, y:0},{x:0, y:1},{x:1, y:1},{x:0, y:2}]																					
 												],
 										xsize: [3,2],
 										ysize: [2,3]
@@ -52,9 +50,7 @@ export default class Figure {
 										name: "s",
 										coords: [
 													[{x:1, y:0},{x:2, y:0},{x:0, y:1},{x:1, y:1}],
-													[{x:0, y:0},{x:0, y:1},{x:1, y:1},{x:1, y:2}]
-													
-													
+													[{x:0, y:0},{x:0, y:1},{x:1, y:1},{x:1, y:2}]													
 												],
 										xsize: [3,2],
 										ysize: [2,3]
@@ -149,15 +145,19 @@ export default class Figure {
 		this.rotateRecalc(this.rotation)
 	}
 
+
 	rotateLeft(){
-		
 
-		this.rotation -=1
-
-		if (this.rotation < 0){
-			this.resetRotation()
+		if (this.rotation === 0){
+			this.rotation = this.shapes.length - 1
+			this.rotateRecalc(this.rotation)
 		}
-		this.rotateRecalc(this.rotation)
+			
+		else{
+			this.rotation -= 1
+
+			this.rotateRecalc(this.rotation)
+		}
 	}
 
 

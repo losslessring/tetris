@@ -56,12 +56,14 @@ const mainCycle = (position, increment, boundary) => {
 
                 //Переворот фигуры, проверка пересечения, если фигура после переворота
                 //пересекает уже лежащие фигуры, повернуть обратно
+                console.log("figure rotation = ", figure.rotation)
                 figure.rotateRight()
                 
-                if(checkCells(field.cells, figure.shape, position, 0, 1, 1)){
-                	figure.rotateRight()
-                	figure.rotateRight()
-                	figure.rotateRight()
+
+
+                // Проверка, если фигура вызезла за дно, перевернуть обратно
+                if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.bottomBoundary)){
+                	figure.rotateLeft()	
                 }
 
                 //Переворот, проверка , cделать проверку по индексам для всего массива фигуры
@@ -70,16 +72,13 @@ const mainCycle = (position, increment, boundary) => {
                 if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.rightBoundary) &&
                 	checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.leftBoundary)               	
                 	){
-                	figure.rotateRight()
-                	figure.rotateRight()
-                	figure.rotateRight()	
+                	figure.rotateLeft()	
                 }
-                // Проверка, если фигура вызезла за дно, перевернуть обратно
-                if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.bottomBoundary)){
-                	figure.rotateRight()
-                	figure.rotateRight()
-                	figure.rotateRight()	
+
+                if(checkCells(field.cells, figure.shape, position, 0, 1, 1)){
+                	figure.rotateLeft()
                 }
+
                 
 
                 break
