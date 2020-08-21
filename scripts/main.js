@@ -60,6 +60,8 @@ const mainCycle = (position, increment, boundary) => {
                 
                 if(checkCells(field.cells, figure.shape, position, 0, 1, 1)){
                 	figure.rotateRight()
+                	figure.rotateRight()
+                	figure.rotateRight()
                 }
 
                 //Переворот, проверка , cделать проверку по индексам для всего массива фигуры
@@ -68,10 +70,14 @@ const mainCycle = (position, increment, boundary) => {
                 if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.rightBoundary) &&
                 	checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.leftBoundary)               	
                 	){
+                	figure.rotateRight()
+                	figure.rotateRight()
                 	figure.rotateRight()	
                 }
                 // Проверка, если фигура вызезла за дно, перевернуть обратно
                 if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.bottomBoundary)){
+                	figure.rotateRight()
+                	figure.rotateRight()
                 	figure.rotateRight()	
                 }
                 
@@ -96,13 +102,20 @@ const mainCycle = (position, increment, boundary) => {
             	// console.log((rows * cols -1))
             	// console.log(!(position + figure.ysize - 1 + cols >= rows * cols - 1))
                 console.log('down')
+
+
+                //console.log(timerId)
                 //let prevPosition = position
-                //if (!(position + figure.ysize  + cols > rows * cols - 1)){
-				//	position = position + cols
-                //}
-                // if(position > rows * cols - 1){
-                // 	position = prevPosition
-                // }
+                position = position + cols
+                if (checkCells(field.cells, figure.shape, position, 0, 1, 1)){
+					position = position - cols
+                }
+                if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.bottomBoundary)){
+                	position = position - cols	
+                }
+     //            if(position > rows * cols - 1){
+     //            	position = prevPosition
+     //            }
                 
                 break
         }
