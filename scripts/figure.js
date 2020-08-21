@@ -70,6 +70,17 @@ export default class Figure {
 										xsize: [3,2,3,2],
 										ysize: [2,3,2,3]
 									},
+																		{
+										name: "l",
+										coords: [
+													[{x:2, y:0},{x:0, y:1},{x:1, y:1},{x:2, y:1}],
+													[{x:0, y:0},{x:0, y:1},{x:0, y:2},{x:1, y:2}],
+													[{x:0, y:0},{x:1, y:0},{x:2, y:0},{x:0, y:1}],
+													[{x:0, y:0},{x:1, y:0},{x:1, y:1},{x:1, y:2}]																										
+												],
+										xsize: [3,2,3,2],
+										ysize: [2,3,2,3]
+									},
 
 								]
 		// this.shapes = this.shapeDescription[0].coords.map((figure) => {
