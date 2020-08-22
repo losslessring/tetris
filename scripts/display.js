@@ -5,11 +5,15 @@ export default class DisplayField {
     constructor (container, rows, cols, cells) {
         
         //Generate grid field based on rows and columns
-        container.style.setProperty('--grid-rows', rows);
-        container.style.setProperty('--grid-cols', cols);
+        container.style.setProperty('--grid-rows', rows)
+        container.style.setProperty('--grid-cols', cols)
+        //container.style.setProperty('width', cols)
+        //container.style.setProperty('height', cols)
+
         for (let c = 0; c < (rows * cols); c++) {
             let cell = document.createElement("div");
-            cell.innerText = (c);
+             //Текст внутри клетки               
+             // cell.innerText = (c);
             container.appendChild(cell).className = "cell";
         }
         

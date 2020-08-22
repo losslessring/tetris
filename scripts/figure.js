@@ -97,6 +97,7 @@ export default class Figure {
 		//console.log(this.getRandomInt(0, this.shapeDescription.length - 1))
 
 		this.shapeNumber = this.getRandomInt(0, this.shapeDescription.length - 1)
+		
 		//console.log(this.shapeDescription[this.shapeNumber].xsize)
 		this.shapes = this.shapeDescription[this.shapeNumber].coords.map(
 			(figure) => {

@@ -105,13 +105,25 @@ const mainCycle = (position, increment, boundary) => {
 
                 //console.log(timerId)
                 //let prevPosition = position
+
+                // Опускаем вниз
                 position = position + cols
+
+                //Проверяю, если клетка занята, вернуть вверх
                 if (checkCells(field.cells, figure.shape, position, 0, 1, 1)){
 					position = position - cols
                 }
-                if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.bottomBoundary)){
-                	position = position - cols	
+
+                //Если вылезли за нижнюю границу стакана - вернуть вверх
+                if (checkCells(field.cells, figure.shape, position, 0, 1, undefined)){
+					position = position - cols
                 }
+
+                // if(checkCellsIndices(field.cells, figure.shape, position, 0, 1, field.bottomBoundary)){
+                // 	position = position - cols	
+                // }
+
+
      //            if(position > rows * cols - 1){
      //            	position = prevPosition
      //            }
