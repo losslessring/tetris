@@ -1,10 +1,18 @@
 html, body{
  margin: 0;
+ background-color: silver;
 }
 
 :root {
   --grid-cols: 1;
   --grid-rows: 1;
+  
+}
+
+#align-to-center {
+	display: grid;
+	justify-content: center;
+	align-items: center;
 }
 
 #container {
@@ -12,12 +20,16 @@ html, body{
   /*grid-gap: 1em;*/
   grid-template-rows: repeat(var(--grid-rows), 1fr);
   grid-template-columns: repeat(var(--grid-cols), 1fr);
+
 }
 
-.grid-item {
+.cell {
   padding: 1em;
+  /*width: 2em;*/
+  /*height: 2em;*/
   border: 1px solid #ddd;
   text-align: center;
+
 }
 
 /*#container {
